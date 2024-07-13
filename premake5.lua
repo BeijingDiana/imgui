@@ -1,9 +1,12 @@
 project "imgui"
     kind "StaticLib"
     language "C++"
+    cppdialect "C++20"
+    staticruntime "on"
+    
  
-	targetdir ("Binaries/" .. outputdir .. "/%{prj.name}")
-    objdir ("Intermediate/" .. outputdir .. "/%{prj.name}")
+    targetdir (wksTarget .. "/%{prj.name}")
+    objdir (wksObject .. "/%{prj.name}")
  
 	files
 	{
@@ -29,6 +32,12 @@ project "imgui"
  
 	filter "system:windows"
         systemversion "latest"
-        cppdialect "C++17"
-        staticruntime "On"
+
+        filter "configurations:Debug"
+        symbols "on"
+        runtime "Debug"
+        
+        
+        filter "configurations:Release"
+        optimize "on"
         runtime "Release"
